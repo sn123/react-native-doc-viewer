@@ -3,8 +3,8 @@ package com.reactdocviewerexample;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.philipphecht.RNReactNativeDocViewerPackage;
 import com.rnfs.RNFSPackage;
+import com.philipphecht.RNReactNativeDocViewerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -25,8 +25,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNReactNativeDocViewerPackage(),
-            new RNFSPackage()
+            new RNFSPackage(),
+            new RNReactNativeDocViewerPackage()
       );
     }
 

@@ -8,9 +8,10 @@
 #import "RNDocViewer.h"
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVFoundation.h>S
 #import <AVKit/AVKit.h>
 #import "QLCustomPreviewItem.h"
+#import "CustomPreviewController.h"
 
 @implementation RNDocViewer
 CGFloat prog;
@@ -56,6 +57,7 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
         NSDictionary* dict = [array objectAtIndex:0];
         NSString* urlStr = dict[@"url"];
         NSString* fileNameOptional = dict[@"fileName"];
+        NSString* hideShareButton = dict[@"hideShareButton"];
         NSString* fileType = dict[@"fileType"];
         NSURL* url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSData* dat = [NSData dataWithContentsOfURL:url];
@@ -115,7 +117,9 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            QLPreviewController* cntr = [[QLPreviewController alloc] init];
+            CustomPreviewController *previewController = [[CustomPreviewController alloc]init];
+            previewController.hideShareButton = hideShareButton;
+            QLPreviewController* cntr = previewController;
             cntr.delegate = weakSelf;
             cntr.dataSource = weakSelf;
             if (callback) {
@@ -209,6 +213,7 @@ RCT_EXPORT_METHOD(openDocb64:(NSArray *)array callback:(RCTResponseSenderBlock)c
         NSString* base64String = dict[@"base64"];
         NSString* filename = dict[@"fileName"];
         NSString* filetype = dict[@"fileType"];
+        NSString* hideShareButton = dict[@"hideShareButton"];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"data:application/octet-stream;base64,%@",base64String]];
         NSData* dat = [NSData dataWithContentsOfURL:url];
         if (dat == nil) {
@@ -229,7 +234,9 @@ RCT_EXPORT_METHOD(openDocb64:(NSArray *)array callback:(RCTResponseSenderBlock)c
         weakSelf.fileUrl = tmpFileUrl;
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            QLPreviewController* cntr = [[QLPreviewController alloc] init];
+            CustomPreviewController *previewController = [[CustomPreviewController alloc]init];
+            previewController.hideShareButton = hideShareButton;
+            QLPreviewController* cntr = previewController;
             cntr.delegate = weakSelf;
             cntr.dataSource = weakSelf;
             if (callback) {

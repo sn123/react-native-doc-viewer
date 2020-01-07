@@ -84,7 +84,8 @@ export default class ReactDocViewerExample extends Component {
     if(Platform.OS === 'ios'){
       OpenFile.openDoc([{
         url:"https://calibre-ebook.com/downloads/demos/demo.docx",
-        fileNameOptional:"test filename"
+        fileNameOptional:"test filename",
+        hideShareButton: "1",
       }], (error, url) => {
          if (error) {
           this.setState({animating: false});
