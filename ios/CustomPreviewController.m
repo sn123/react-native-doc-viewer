@@ -18,7 +18,7 @@ NSTimer *timer;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if ([_hideShareButton  isEqual: @"1"]) {
-        timer = [NSTimer scheduledTimerWithTimeInterval: 1.0
+        timer = [NSTimer scheduledTimerWithTimeInterval: 0.25
                                                  target: self
                                                selector:@selector(onTick:)
                                                userInfo: nil repeats:YES];
